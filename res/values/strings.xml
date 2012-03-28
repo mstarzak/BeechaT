@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Copyright (C) 2009 The Android Open Source Project
+
+     Licensed under the Apache License, Version 2.0 (the "License");
+     you may not use this file except in compliance with the License.
+     You may obtain a copy of the License at
+
+          http://www.apache.org/licenses/LICENSE-2.0
+
+     Unless required by applicable law or agreed to in writing, software
+     distributed under the License is distributed on an "AS IS" BASIS,
+     WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+     See the License for the specific language governing permissions and
+     limitations under the License.
+-->
+
+<resources>
+    <string name="app_name">BTCommunicator</string>
+
+    <!--  BTCommunicator -->
+    <string name="send">Wyślij</string>
+    <string name="not_connected">Brak połączenia z urządzeniem</string>
+    <string name="bt_not_enabled_leaving">Nie włączono Bluetooth, aplikacja zamknięta.</string>
+    <string name="title_connecting">łączenie...</string>
+    <string name="title_connected_to">połączono z:</string>
+    <string name="title_not_connected">brak połączenia</string>
+
+    <!--  DeviceListActivity -->
+    <string name="scanning">skanuje w poszukiwaniu urządzeń...</string>
+    <string name="select_device">wybierz urządzenie</string>
+    <string name="none_paired">Nie sparowano żadnego urządzenia</string>
+    <string name="none_found">Nie znaleziono urządzeń</string>
+    <string name="title_paired_devices">Sparowane urządzenia</string>
+    <string name="title_other_devices">Inne urządzenia</string>
+    <string name="button_scan">Skanuj</string>
+    
+    <!--  Author -->
+    <string name="button_back">Wstecz</string>
+
+    <!-- Options Menu -->
+    <string name="connect">Połącz z urządzeniem</string>
+    <string name="discoverable">Ustaw wykrywalność</string>
+    <string name="author">O autorze</string>
+    <string name="info">Author: KunDun\nVersion: beta 0.99\nApp name: BTCommunicator\nGraphics: propsy @marian0</string>
+    
+</resources>
