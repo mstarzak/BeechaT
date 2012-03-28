@@ -15,9 +15,9 @@
 -->
 
 <resources>
-    <string name="app_name">BTCommunicator</string>
+    <string name="app_name">BeechaT</string>
 
-    <!--  BTCommunicator -->
+    <!--  BeechaT -->
     <string name="send">Wyślij</string>
     <string name="not_connected">Brak połączenia z urządzeniem</string>
     <string name="bt_not_enabled_leaving">Nie włączono Bluetooth, aplikacja zamknięta.</string>
@@ -41,6 +41,6 @@
     <string name="connect">Połącz z urządzeniem</string>
     <string name="discoverable">Ustaw wykrywalność</string>
     <string name="author">O autorze</string>
-    <string name="info">Author: KunDun\nVersion: beta 0.99\nApp name: BTCommunicator\nGraphics: propsy @marian0</string>
+    <string name="info">Author: KunDun\nVersion: beta 0.99\nApp name: BeechaT\nGraphics: propsy @marian0</string>
     
 </resources>

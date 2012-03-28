@@ -40,11 +40,11 @@ import android.util.Log;
 
 public class BeechaTService {
     // Debugging
-    private static final String TAG = "BTCommunicatorService";
+    private static final String TAG = "BeechaTService";
     private static final boolean D = true;
 
     // Name for the SDP record when creating server socket
-    private static final String NAME = "BTCommunicator";
+    private static final String NAME = "BeechaT";
 
     // Unique UUID for this application
     private static final UUID MY_UUID = UUID.fromString("fa87c0d0-afac-11de-8a39-0800200c9a66");
@@ -64,7 +64,7 @@ public class BeechaTService {
     public static final int STATE_CONNECTED = 3;  // now connected to a remote device
 
     /**
-     * Constructor. Prepares a new BTCommunicator session.
+     * Constructor. Prepares a new BeechaT session.
      * @param context  The UI Activity Context
      * @param handler  A Handler to send messages back to the UI Activity
      */

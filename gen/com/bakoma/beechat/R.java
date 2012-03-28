@@ -61,7 +61,7 @@ public final class R {
          */
         public static final int scanning=0x7f040007;
         public static final int select_device=0x7f040008;
-        /**   BTCommunicator 
+        /**   BeechaT 
          */
         public static final int send=0x7f040001;
         public static final int title_connected_to=0x7f040005;

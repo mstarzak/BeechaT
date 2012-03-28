@@ -45,7 +45,7 @@ import android.widget.Toast;
  */
 public class BeechaT extends Activity {
     // Debugging
-    private static final String TAG = "BTCommunicator";
+    private static final String TAG = "BeechaT";
     private static final boolean D = true;
 
     // Message types sent from the BluetoothChatService Handler
@@ -55,7 +55,7 @@ public class BeechaT extends Activity {
     public static final int MESSAGE_DEVICE_NAME = 4;
     public static final int MESSAGE_TOAST = 5;
 
-    // Key names received from the BTCommunicatorService Handler
+    // Key names received from the BeechaTService Handler
     public static final String DEVICE_NAME = "device_name";
     public static final String TOAST = "toast";
 
@@ -216,7 +216,7 @@ public class BeechaT extends Activity {
 
         // Check that there's actually something to send
         if (message.length() > 0) {
-            // Get the message bytes and tell the BTCommunicatorService to write
+            // Get the message bytes and tell the BeechaTService to write
             byte[] send = message.getBytes();
             mChatService.write(send);
 
@@ -240,7 +240,7 @@ public class BeechaT extends Activity {
         }
     };
 
-    // The Handler that gets information back from the BTCommunicatorService
+    // The Handler that gets information back from the BeechaTService
     private final Handler mHandler = new Handler() {
         @Override
         public void handleMessage(Message msg) {
