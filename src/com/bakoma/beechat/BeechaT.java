@@ -194,6 +194,7 @@ public class BeechaT extends Activity {
     	if (mBluetoothAdapter.isEnabled() && wasBluetoothEnabled) {
     		mBluetoothAdapter.disable();
     	}
+    	// chuj Ci w dupe cwelu
         super.onDestroy();
         // Stop the Bluetooth chat services
         if (mChatService != null) mChatService.stop();
