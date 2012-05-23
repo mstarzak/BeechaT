@@ -79,7 +79,9 @@ public class BeechaT extends Activity {
     private BluetoothAdapter mBluetoothAdapter = null;
     // Member object for the chat services
     private BeechaTService mChatService = null;
-
+    // Remember if bluetooth was started by this app
+    private boolean wasBluetoothEnabled = false;
+    
     //onCreate method - requires overriding (always!) - running on startup of app, before onStart
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -117,6 +119,7 @@ public class BeechaT extends Activity {
         if (!mBluetoothAdapter.isEnabled()) {
             Intent enableIntent = new Intent(BluetoothAdapter.ACTION_REQUEST_ENABLE);
             startActivityForResult(enableIntent, REQUEST_ENABLE_BT);
+            wasBluetoothEnabled = true;
         // Otherwise, setup the chat session
         } else {
             if (mChatService == null) setupChat();
@@ -187,6 +190,10 @@ public class BeechaT extends Activity {
     // onDestroy method - running when app instance is destroyed
     @Override
     public void onDestroy() {
+    	// disable Bluetooth if was started by app
+    	if (mBluetoothAdapter.isEnabled() && wasBluetoothEnabled) {
+    		mBluetoothAdapter.disable();
+    	}
         super.onDestroy();
         // Stop the Bluetooth chat services
         if (mChatService != null) mChatService.stop();

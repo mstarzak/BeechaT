@@ -41,6 +41,6 @@
     <string name="connect">Połącz z urządzeniem</string>
     <string name="discoverable">Ustaw wykrywalność</string>
     <string name="author">O autorze</string>
-    <string name="info">Author: KunDun\nVersion: beta 0.99\nApp name: BeechaT\nGraphics: propsy @marian0</string>
+    <string name="info">Authors:\tKunDun\n\t\t\t\tMarian0\n\t\t\t\tMr Brick\nVersion: beta 0.99\nApp name: BeechaT\nGraphics: Marian0</string>
     
 </resources>

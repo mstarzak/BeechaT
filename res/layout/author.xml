@@ -13,18 +13,31 @@
      See the License for the specific language governing permissions and
      limitations under the License.
 -->
-
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
-    >
-    <LinearLayout
-        android:orientation="horizontal"
+    android:gravity="bottom|top"
+    android:orientation="vertical" >
+
+    <ImageView
+        android:id="@+id/imageView1"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        >
-        <TextView android:layout_height="wrap_content" android:layout_width="wrap_content" android:id="@+id/textView1" android:textAppearance="?android:attr/textAppearanceLarge" android:text="@string/info"></TextView>
-    </LinearLayout>
-    <Button android:layout_height="wrap_content" android:id="@+id/button_back" android:text="@string/button_back" android:layout_width="fill_parent"></Button>
+        android:contentDescription="@string/app_name"
+        android:src="@drawable/app_icon" />
+
+    <TextView
+        android:id="@+id/tv"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/info"
+        android:textAppearance="?android:attr/textAppearanceLarge" />
+
+    <Button
+        android:id="@+id/button_back"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="top"
+        android:text="@string/button_back" />
+
 </LinearLayout>
