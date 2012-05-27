@@ -16,6 +16,11 @@
 
 package com.bakoma.beechat;
 
+import java.text.DateFormat;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.HashMap;
+
 import com.bakoma.beechat.R;
 import android.app.Activity;
 import android.bluetooth.BluetoothAdapter;
@@ -62,7 +67,11 @@ public class BeechaT extends Activity {
     // Intent request codes
     private static final int REQUEST_CONNECT_DEVICE = 1;
     private static final int REQUEST_ENABLE_BT = 2;
-
+    
+    ArrayList<HashMap<String, String>> messageList;
+	static final String KEY_AUTHOR 	= "author";
+	static final String KEY_CONTENT = "content";
+	static final String KEY_TIME 	= "time";
     // Layout Views
     private TextView mTitle;
     private ListView mConversationView;
@@ -72,7 +81,7 @@ public class BeechaT extends Activity {
     // Name of the connected device
     private String mConnectedDeviceName = null;
     // Array adapter for the conversation thread
-    private ArrayAdapter<String> mConversationArrayAdapter;
+    private MessageAdapter mConversationArrayAdapter;
     // String buffer for outgoing messages
     private StringBuffer mOutStringBuffer;
     // Local Bluetooth adapter
@@ -145,9 +154,9 @@ public class BeechaT extends Activity {
 
     private void setupChat() {
         Log.d(TAG, "setupChat()");
-
+        messageList = new ArrayList<HashMap<String,String>>();
         // Initialize the array adapter for the conversation thread
-        mConversationArrayAdapter = new ArrayAdapter<String>(this, R.layout.message);
+        mConversationArrayAdapter = new MessageAdapter(this, messageList);
         mConversationView = (ListView) findViewById(R.id.in);
         mConversationView.setAdapter(mConversationArrayAdapter);
 
@@ -251,6 +260,9 @@ public class BeechaT extends Activity {
     private final Handler mHandler = new Handler() {
         @Override
         public void handleMessage(Message msg) {
+
+            HashMap<String, String> map = new HashMap<String, String>();
+        	
             switch (msg.what) {
             case MESSAGE_STATE_CHANGE:
                 if(D) Log.i(TAG, "MESSAGE_STATE_CHANGE: " + msg.arg1);
@@ -258,7 +270,7 @@ public class BeechaT extends Activity {
                 case BeechaTService.STATE_CONNECTED:
                     mTitle.setText(R.string.title_connected_to);
                     mTitle.append(mConnectedDeviceName);
-                    mConversationArrayAdapter.clear();
+                    //mConversationArrayAdapter.clear();
                     break;
                 case BeechaTService.STATE_CONNECTING:
                     mTitle.setText(R.string.title_connecting);
@@ -273,13 +285,31 @@ public class BeechaT extends Activity {
                 byte[] writeBuf = (byte[]) msg.obj;
                 // construct a string from the buffer
                 String writeMessage = new String(writeBuf);
-                mConversationArrayAdapter.add("Ja: " + writeMessage);
+                
+                // prepare message info
+                map.put(KEY_AUTHOR, "Ja");
+                map.put(KEY_CONTENT, writeMessage);
+                map.put(KEY_TIME, DateFormat.getDateInstance().format(new Date()));
+                // add message info
+                messageList.add(map);
+                // refresh main UI
+                mConversationArrayAdapter.setLayout(R.layout.my_message);
+                mConversationArrayAdapter.notifyDataSetChanged();
                 break;
             case MESSAGE_READ:
                 byte[] readBuf = (byte[]) msg.obj;
                 // construct a string from the valid bytes in the buffer
                 String readMessage = new String(readBuf, 0, msg.arg1);
-                mConversationArrayAdapter.add(mConnectedDeviceName+":  " + readMessage);
+                
+                // prepare message info
+                map.put(KEY_AUTHOR, mConnectedDeviceName);
+                map.put(KEY_CONTENT, readMessage);
+                map.put(KEY_TIME, DateFormat.getDateInstance().format(new Date()));
+                // add message info
+                messageList.add(map);
+                // refresh main UI
+                mConversationArrayAdapter.setLayout(R.layout.message);
+                mConversationArrayAdapter.notifyDataSetChanged();
                 break;
             case MESSAGE_DEVICE_NAME:
                 // save the connected device's name
