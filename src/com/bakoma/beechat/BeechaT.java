@@ -16,12 +16,11 @@
 
 package com.bakoma.beechat;
 
-import java.text.DateFormat;
+import com.bakoma.beechat.R;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
-
-import com.bakoma.beechat.R;
 import android.app.Activity;
 import android.bluetooth.BluetoothAdapter;
 import android.bluetooth.BluetoothDevice;
@@ -38,7 +37,6 @@ import android.view.View;
 import android.view.Window;
 import android.view.View.OnClickListener;
 import android.view.inputmethod.EditorInfo;
-import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
@@ -72,6 +70,7 @@ public class BeechaT extends Activity {
 	static final String KEY_AUTHOR 	= "author";
 	static final String KEY_CONTENT = "content";
 	static final String KEY_TIME 	= "time";
+	static final String KEY_TYPE 	= "type";
     // Layout Views
     private TextView mTitle;
     private ListView mConversationView;
@@ -258,6 +257,7 @@ public class BeechaT extends Activity {
 
     // The Handler that gets information back from the BeechaTService
     private final Handler mHandler = new Handler() {
+    	SimpleDateFormat sdf = new SimpleDateFormat("HH:mm:ss");
         @Override
         public void handleMessage(Message msg) {
 
@@ -287,13 +287,13 @@ public class BeechaT extends Activity {
                 String writeMessage = new String(writeBuf);
                 
                 // prepare message info
+                map.put(KEY_TYPE, "w");
                 map.put(KEY_AUTHOR, "Ja");
                 map.put(KEY_CONTENT, writeMessage);
-                map.put(KEY_TIME, DateFormat.getDateInstance().format(new Date()));
+                map.put(KEY_TIME, sdf.format(new Date()));
                 // add message info
                 messageList.add(map);
                 // refresh main UI
-                mConversationArrayAdapter.setLayout(R.layout.my_message);
                 mConversationArrayAdapter.notifyDataSetChanged();
                 break;
             case MESSAGE_READ:
@@ -302,13 +302,13 @@ public class BeechaT extends Activity {
                 String readMessage = new String(readBuf, 0, msg.arg1);
                 
                 // prepare message info
+                map.put(KEY_TYPE, "r");
                 map.put(KEY_AUTHOR, mConnectedDeviceName);
                 map.put(KEY_CONTENT, readMessage);
-                map.put(KEY_TIME, DateFormat.getDateInstance().format(new Date()));
+                map.put(KEY_TIME, sdf.format(new Date()));
                 // add message info
                 messageList.add(map);
                 // refresh main UI
-                mConversationArrayAdapter.setLayout(R.layout.message);
                 mConversationArrayAdapter.notifyDataSetChanged();
                 break;
             case MESSAGE_DEVICE_NAME:

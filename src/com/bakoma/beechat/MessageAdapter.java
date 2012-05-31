@@ -16,10 +16,8 @@ public class MessageAdapter extends BaseAdapter {
     private Activity activity;
     private ArrayList<HashMap<String, String>> data;
     private static LayoutInflater inflater = null;
-    private int resource;
     
     public MessageAdapter(Activity activity, ArrayList<HashMap<String, String>> data) {
-    	this.resource	= R.layout.message;
         this.activity	= activity;
         this.data		= data;
         inflater 		= (LayoutInflater)activity.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
@@ -39,9 +37,13 @@ public class MessageAdapter extends BaseAdapter {
  
     public View getView(int position, View convertView, ViewGroup parent) {
         View vi = convertView;
+        HashMap<String, String> message = new HashMap<String, String>();
+        message = data.get(position);
         
-        if(convertView == null) {
-            vi = inflater.inflate(this.resource, null);
+        if(message.get(BeechaT.KEY_TYPE).equals("w")) {
+            vi = inflater.inflate(R.layout.message, null);
+        } else {
+        	vi = inflater.inflate(R.layout.my_message, null);
         }
  
         TextView author 	= (TextView)vi.findViewById(R.id.msgauthor); // messsage author
@@ -49,19 +51,12 @@ public class MessageAdapter extends BaseAdapter {
         TextView time 		= (TextView)vi.findViewById(R.id.msgtime); // duration
         //ImageView image		=(ImageView)vi.findViewById(R.id.userimage); // thumb image
  
-        HashMap<String, String> message = new HashMap<String, String>();
-        message = data.get(position);
- 
         // Setting all values in listview
         author.setText(message.get(BeechaT.KEY_AUTHOR));
         content.setText(message.get(BeechaT.KEY_CONTENT));
         time.setText(message.get(BeechaT.KEY_TIME));
         //.DisplayImage(song.get(CustomizedListView.KEY_THUMB_URL), thumb_image);
         return vi;
-    }
-    
-    public void setLayout(int resource) {
-    	this.resource = resource;
     }
     
 	public Activity getActivity() {
