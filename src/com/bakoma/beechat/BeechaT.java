@@ -87,6 +87,8 @@ public class BeechaT extends Activity {
     private BluetoothAdapter mBluetoothAdapter = null;
     // Member object for the chat services
     private BeechaTService mChatService = null;
+    // Emoticons parser
+    private EmojiParser mEmojiParser = null;
     // Remember if bluetooth was started by this app
     private boolean wasBluetoothEnabled = false;
     
@@ -179,6 +181,9 @@ public class BeechaT extends Activity {
 
         // Initialize the buffer for outgoing messages
         mOutStringBuffer = new StringBuffer("");
+        
+        // Initialize the EmojiParser
+        mEmojiParser = new EmojiParser();
     }
 
     // onPause method - running when we minimize the app
@@ -289,7 +294,7 @@ public class BeechaT extends Activity {
                 // prepare message info
                 map.put(KEY_TYPE, "w");
                 map.put(KEY_AUTHOR, "Ja");
-                map.put(KEY_CONTENT, writeMessage);
+                map.put(KEY_CONTENT, mEmojiParser.parse(writeMessage));
                 map.put(KEY_TIME, sdf.format(new Date()));
                 // add message info
                 messageList.add(map);
@@ -304,7 +309,7 @@ public class BeechaT extends Activity {
                 // prepare message info
                 map.put(KEY_TYPE, "r");
                 map.put(KEY_AUTHOR, mConnectedDeviceName);
-                map.put(KEY_CONTENT, readMessage);
+                map.put(KEY_CONTENT, mEmojiParser.parse(readMessage));
                 map.put(KEY_TIME, sdf.format(new Date()));
                 // add message info
                 messageList.add(map);
